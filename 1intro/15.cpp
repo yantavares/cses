@@ -1,0 +1,18 @@
+int main()
+{
+}
+
+/*
+
+ABCD
+ABDC
+ADBC
+DABC
+DACB
+DCAB
+CDAB
+CDBA
+CBDA
+BCDA
+
+*/

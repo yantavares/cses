@@ -1,33 +1,45 @@
 #include <iostream>
+#include <string>
+#include <vector>
+
 using namespace std;
 
-void decimalToBinary(int n)
+void generateGrayarr(int n)
 {
-    int arr[11], i = 0, num = n;
+    if (n <= 0)
+        return;
 
-    while (n != 0)
+    vector<string> arr;
+
+    arr.push_back("0");
+    arr.push_back("1");
+
+    int i, j;
+    for (i = 2; i < (1 << n); i = i << 1)
     {
-        arr[i] = n % 2;
-        i++;
-        n = n / 2;
+
+        for (j = i - 1; j >= 0; j--)
+            arr.push_back(arr[j]);
+
+        for (j = 0; j < i; j++)
+            arr[j] = "0" + arr[j];
+
+        for (j = i; j < 2 * i; j++)
+            arr[j] = "1" + arr[j];
     }
 
-    for (i = i - 1; i >= 0; i--)
-    {
-        cout << arr[i];
-    }
-    cout << endl;
+    for (i = 0; i < arr.size(); i++)
+        cout << arr[i] << endl;
 }
+
 int main()
 {
     int n;
+
     cin >> n;
 
-    cout << 0 << endl;
-    for (size_t i = 1; i <= n; i++)
-    {
-        decimalToBinary(i);
-    }
+    generateGrayarr(n);
 
     return 0;
 }
+// https://www.geeksforgeeks.org/generate-n-bit-gray-codes/
