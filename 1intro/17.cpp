@@ -8,15 +8,12 @@ int countt = 0;
 bool isValid(int board[][8], int row, int col)
 {
 
-    if (board[row][col] == -1)
-        return false;
-    else
+    if (board[row][col] != 2)
     {
-
         // loop to check horizontal positions
         for (int i = col; i >= 0; i--)
         {
-            if (board[row][i])
+            if (board[row][i] == 1)
                 return false;
         }
         int i = row, j = col;
@@ -24,7 +21,7 @@ bool isValid(int board[][8], int row, int col)
         // loop to check the upper left diagonal
         while (i >= 0 && j >= 0)
         {
-            if (board[i][j])
+            if (board[i][j] == 1)
                 return false;
             i--;
             j--;
@@ -35,13 +32,14 @@ bool isValid(int board[][8], int row, int col)
         // loop to check the lower left diagonal
         while (i < 8 && j >= 0)
         {
-            if (board[i][j])
+            if (board[i][j] == 1)
                 return false;
             i++;
             j--;
         }
         return true;
     }
+    return false;
 }
 
 // function to check all the possible solutions
@@ -70,16 +68,26 @@ int main()
 {
 
     // initial board situation
-    int board[8][8] = {{0, 0, 0, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 0, 0, 0},
-                       {0, 0, -1, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, -1, -1, 0},
-                       {0, 0, 0, -1, 0, 0, 0, 0},
-                       {0, 0, 0, 0, 0, 0, 0, 0}};
+    int board[8][8];
+    char s;
+
+    for (size_t i = 0; i < 8; i++)
+    {
+        for (size_t j = 0; j < 8; j++)
+        {
+            cin >> s;
+            if (s == '.')
+            {
+                board[i][j] = 0;
+            }
+            else
+            {
+                board[i][j] = 2;
+            }
+        }
+    }
+
     ninjaQueens(board, 0);
-    /* In total, 92 solutions exist for 8x8 board. This statement will verify our code*/
     cout << countt << endl;
     return 0;
 }
